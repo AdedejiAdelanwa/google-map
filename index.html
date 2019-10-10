@@ -7,9 +7,8 @@
   <title>My Google Map</title>
   <style>
      
-      #map {
-        width: 100vw;
-        height: 80vh;
+      :root{
+        font-size: 62.5%;
       }
       
       html, body {
@@ -17,22 +16,58 @@
         margin: 0;
         padding: 0;
       }
+      * {
+        box-sizing: inherit;
+      }
       body {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
+
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #add-button {
+        position: absolute;
+        bottom: 3rem;
+        left: 1rem;
+        display: inline-block;
+        border-radius: 50%;
+        padding: 1.2rem 1.8rem;;
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: #fff;
+        background-color: rgb(9, 165, 9);
+        cursor: pointer;
+        transition: all .3s;
+
+        z-index: 100;
+      }
+
+      #add-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,.4);
+      }
     </style>
 </head>
 <body>
-    <h1>My Google Map</h1>
-    <div id="map"></div>
+    <span id="add-button">
+        &plus;
+    </span>
+    <div id="map">
+     <!-- Where Google map is displayed  -->
+    </div>
+
     <script>
       function initMap() {
         
         // Map Options
         let options = {
-           zoom: 15,
+           zoom: 12,
            center: {
              lat:  6.465422, 
              lng: 3.406448
@@ -42,12 +77,19 @@
         const map = new 
         google.maps.Map(document.getElementById('map'), options);
 
-        //Listen for Click on map
 
-        google.maps.event.addListener(map,'click',
+        //Listen For click on button before trigerring listen for click on map
+        const addButton = document.getElementById('add-button');
+        addButton.addEventListener('click', () => {
+          
+          google.maps.event.addListener(map,'click',
           (event) =>  {
             addMarker({coords:event.latLng});
           });
+        });
+
+
+       
 
         //Markers Array
         const markers = [
@@ -97,6 +139,8 @@
 
         }
       }
+
+      
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtQbbixPAEfC5D3fimB5DnCGgh830MrSE
     &callback=initMap" async defer>
