@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>My Google Map</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
   <style>
      
       :root{
@@ -37,7 +38,7 @@
         right: 1rem;
         display: inline-block;
         border-radius: 50%;
-        padding: 1.2rem 1.8rem;;
+        padding: 1.2rem 1.2rem;;
         font-size: 2.5rem;
         font-weight: 400;
         color: #fff;
@@ -52,11 +53,20 @@
         transform: translateY(-1px);
         box-shadow: 0 2px 4px rgba(0,0,0,.4);
       }
+
+      #plus-sign {
+        position: absolute;
+        top: 5%;
+        right: 20%;
+        font-weight: 900;
+        color: #fff;
+      }
     </style>
 </head>
 <body>
     <span id="add-button">
-        &plus;
+      <span id="plus-sign">&plus;</span>
+      <i class="fas fa-mosque"></i>
     </span>
     <div id="map">
      <!-- Where Google map is displayed  -->
@@ -151,7 +161,7 @@
           };
 
           popup.setPosition(pos);
-          popup.setContent('Wale Taiwo is a fool!');
+          popup.setContent('Fetching close salah places...');
           popup.open(map);
           map.setCenter(pos);
         }, () => {
