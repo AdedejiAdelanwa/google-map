@@ -61,6 +61,50 @@
         font-weight: 900;
         color: #fff;
       }
+
+      #search {
+        position: absolute;
+        top: 5%;
+        width: 90vw;
+        background-color: #fff;
+        border-radius: 2rem;
+        font-size: 1.6rem;
+        color: grey;
+
+        z-index: 100;
+        transition: all .3s;
+      }
+      input {
+        width: 95%;
+        display: inline-block;
+        padding: 1.2rem 1.5rem;
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+
+        border: 0;
+        outline: none; 
+      }
+
+      input:focus {
+        box-shadow: 0 2px 4px rgba(0,0,0,.4);
+      }
+
+      @media only screen and (min-width: 400px) {
+        #search {
+          width: 50vw;
+          }
+      }
+
+      @media only screen and (max-width: 900px) {
+        #search {
+          width: 80vw;
+          }
+      }
+      @media only screen and (max-width: 645px) {
+        .search-icon {
+          display: none;
+          }
+      }
     </style>
 </head>
 <body>
@@ -68,6 +112,10 @@
       <span id="plus-sign">&plus;</span>
       <i class="fas fa-mosque"></i>
     </span>
+    <form id="search" action="#" method="get">
+        <input  type="text" name="search" id="search-input" placeholder="search a place...">
+        <i class="fas fa-search-location search-icon"></i>
+    </form>
     <div id="map">
      <!-- Where Google map is displayed  -->
     </div>
