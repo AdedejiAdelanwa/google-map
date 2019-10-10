@@ -63,6 +63,8 @@
     </div>
 
     <script>
+
+      let map, popup;
       function initMap() {
         
         // Map Options
@@ -74,7 +76,7 @@
            }
         }
         //New Map
-        const map = new 
+        map = new 
         google.maps.Map(document.getElementById('map'), options);
 
 
@@ -128,7 +130,7 @@
 
         //Create popup window
         if(props.content) {
-           const popup = new google.maps.InfoWindow({
+           popup = new google.maps.InfoWindow({
              content: props.content
         });
 
@@ -140,7 +142,24 @@
         }
       }
 
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( (position) => {
+          let pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          popup.setPosition(pos);
+          popup.setContent('Location found.');
+          popup.open(map);
+          map.setCenter(pos);
+        }, () => {
+          handleLocationError(true, popup, map.getCenter());
+        });
       
+      } else {
+        handleLocationError(false, popup, map.getCenter());
+      };
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtQbbixPAEfC5D3fimB5DnCGgh830MrSE
     &callback=initMap" async defer>
